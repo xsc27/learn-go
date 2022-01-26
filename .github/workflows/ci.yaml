@@ -51,7 +51,8 @@ jobs:
             ~/go/pkg
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-go-
-      - uses: goreleaser/goreleaser-action@v2
+      - name: Create snapshot
+        uses: goreleaser/goreleaser-action@v2
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
         with:
           version: latest
@@ -65,7 +66,8 @@ jobs:
             dist/checksums.txt
           retention-days: 5
           if-no-files-found: error
-      - uses: goreleaser/goreleaser-action@v2
+      - name: Release
+        uses: goreleaser/goreleaser-action@v2
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         with:
           version: latest
