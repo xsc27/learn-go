@@ -1,0 +1,28 @@
+linters:
+  presets:
+    - bugs
+    - comment
+    - complexity
+    - error
+    - format
+    - import
+    - metalinter
+    - module
+    - performance
+    # - sql
+    - style
+    - test
+    - unused
+  disable:
+    - exhaustivestruct
+    - gochecknoglobals
+    - gochecknoinits
+    - godox
+    - golint  # Deprecated
+    - interfacer  # Deprecated
+    - maligned  # Deprecated
+    - scopelint  # Deprecated
+linters-settings:
+  gofumpt:
+    lang-version: "1.17"
+    extra-rules: true
