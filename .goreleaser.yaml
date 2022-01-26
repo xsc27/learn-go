@@ -1,0 +1,29 @@
+project_name: fizzbuzz
+before:
+  hooks:
+    - go mod download
+    - go generate ./...
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+    binary: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    no_unique_dist_dir: true
+archives:
+  - format: binary
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: '{{ incpatch .Version }}-SNAPSHOT-{{ .ShortCommit }}'
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^chore'
+      - '^ci'
+      - '^docs'
+      - '^test'
