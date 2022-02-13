@@ -15,14 +15,30 @@ linters:
     - unused
   disable:
     - exhaustivestruct
+    - forbidigo
     - gochecknoglobals
     - gochecknoinits
     - godox
-    - golint  # Deprecated
+    - prealloc    # For most programs usage of prealloc will be a premature optimization.
+    - gofmt       # Superseded by gofumpt
+    - golint      # Deprecated
     - interfacer  # Deprecated
-    - maligned  # Deprecated
-    - scopelint  # Deprecated
+    - maligned    # Deprecated
+    - scopelint   # Deprecated
 linters-settings:
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+      - opinionated
   gofumpt:
-    lang-version: "1.17"
     extra-rules: true
+  govet:
+    check-shadowing: true
+    enable-all: true
+  maligned:
+    suggest-new: true
+issues:
+  exclude:
+    - declaration of "(err|ctx)" shadows declaration at
